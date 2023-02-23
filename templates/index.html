@@ -1,0 +1,57 @@
+<html>
+  <head>
+    {% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %} Degrees Bill</title>
+    {% endblock %}
+
+    <script>
+      $(document).ready(function() {
+        $("#inputFahrenheit").keyup(function() {
+          var fahrenheit = $("#inputFahrenheit").val();
+          var celsius = (fahrenheit - 32) * 5 / 9;
+          var bill = (fahrenheit - 32) * 25 / 17;
+          $("#inputCelsius").val(parseFloat(celsius).toFixed(2));
+          $("#inputBill").val(parseFloat(bill).toFixed(2));
+        });
+        $("#inputCelsius").keyup(function() {
+          var celsius = $("#inputCelsius").val();
+          var fahrenheit = (celsius * 9 / 5) + 32;
+          var bill = (fahrenheit - 32) * 25 / 17;
+          $("#inputFahrenheit").val(parseFloat(fahrenheit).toFixed(2));
+          $("#inputBill").val(parseFloat(bill).toFixed(2));
+        });
+        $("#inputBill").keyup(function() {
+          var bill = $("#inputBill").val();
+          var fahrenheit = (bill * 17 / 25) + 32;
+          $("#inputFahrenheit").val(parseFloat(fahrenheit).toFixed(2));
+          var celsius = (fahrenheit - 32) * 5 / 9;
+          $("#inputCelsius").val(parseFloat(celsius).toFixed(2));
+        });
+      });
+      </script>
+  </head>
+  <body>
+
+    <form>
+      <div class="form-group">
+        <label for="inputFahrenheit">Fahrenheit</label>
+        <input type="number" placeholder="Enter Fahrenheit" class="form-control" id="inputFahrenheit" aria-describedby="fahrenheitHelp">
+      </div>
+      <div class="form-group">
+        <label for="inputCelsius">Celsius</label>
+        <input type="number" placeholder="Enter Celsius" class="form-control" id="inputCelsius" aria-describedby="celsiusHelp">
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="inputBill">Degrees Bill</label>
+        <input type="number" placeholder="Enter Degrees Bill" class="form-control" id="inputBill" aria-describedby="billHelp">
+      </div>
+    </form>
+
+  </body>
+  </html>
